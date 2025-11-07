@@ -1,4 +1,5 @@
 import express from 'express';
+import postController from '../controllers/postController.js'
 const router = express.Router();
 
 let posts = [
@@ -11,11 +12,13 @@ let posts = [
 
 
 router.get('/', (req, res) => {
-    const limit = parseInt(req.query.limit);
-    if(!isNaN(limit) && limit > 0) {
-        return res.status(200).json(posts.slice(0,limit));
-    }
-    res.json(posts);
+    // const limit = parseInt(req.query.limit);
+    // if(!isNaN(limit) && limit > 0) {
+    //     return res.status(200).json(posts.slice(0,limit));
+    // }
+    // res.json(posts);
+    const controller = new postController();
+    controller.get(req,res);
 });
 
 router.get('/:id', (req,res) => {
