@@ -8,6 +8,8 @@ let posts = [
 
 ];
 
+
+
 router.get('/', (req, res) => {
     const limit = parseInt(req.query.limit);
     if(!isNaN(limit) && limit > 0) {
@@ -24,6 +26,19 @@ router.get('/:id', (req,res) => {
     }else {
         res.json(post);
     }
+});
+
+router.post('/', (req, res) => {
+    const newPost = {
+        id: posts.length + 1,
+        title: req.body.title
+    }
+
+    if (!newPost.title) {
+        return res.status(400);
+    }
+
+    posts.push(newPost);
 });
 
 export default router;
